@@ -1,0 +1,16 @@
+{
+  "name": "keep-accounting",
+  "version": "1.0.0",
+  "description": "A simple bookkeeping app with authentication and SQLite persistence.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "bookkeeping",
+    "sqlite",
+    "node"
+  ],
+  "license": "MIT"
+}

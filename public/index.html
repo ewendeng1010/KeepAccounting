@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KeepAccounting 记账应用</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">KeepAccounting</p>
+          <h1>简单、清晰、可落库的个人记账应用</h1>
+          <p class="hero-copy">
+            支持注册登录、收入支出记录、日期筛选和实时汇总统计，数据保存在 SQLite 数据库中。
+          </p>
+        </div>
+        <button id="logoutButton" class="ghost-button hidden" type="button">退出登录</button>
+      </header>
+
+      <main class="layout">
+        <section id="authPanel" class="panel auth-panel">
+          <div class="tabs">
+            <button id="loginTab" class="tab active" type="button">登录</button>
+            <button id="registerTab" class="tab" type="button">注册</button>
+          </div>
+
+          <form id="loginForm" class="auth-form">
+            <label>
+              <span>邮箱</span>
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              <span>密码</span>
+              <input type="password" name="password" placeholder="至少 6 位" required />
+            </label>
+            <button class="primary-button" type="submit">登录</button>
+          </form>
+
+          <form id="registerForm" class="auth-form hidden">
+            <label>
+              <span>邮箱</span>
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              <span>密码</span>
+              <input type="password" name="password" placeholder="至少 6 位" required />
+            </label>
+            <button class="primary-button" type="submit">注册并登录</button>
+          </form>
+        </section>
+
+        <section id="appPanel" class="app-panel hidden">
+          <div class="panel welcome-panel">
+            <p class="panel-label">当前用户</p>
+            <h2 id="currentUser">未登录</h2>
+          </div>
+
+          <div class="summary-grid">
+            <article class="panel summary-card summary-income">
+              <p class="panel-label">总收入</p>
+              <strong id="totalIncome">¥0.00</strong>
+            </article>
+            <article class="panel summary-card summary-expense">
+              <p class="panel-label">总支出</p>
+              <strong id="totalExpense">¥0.00</strong>
+            </article>
+            <article class="panel summary-card summary-balance">
+              <p class="panel-label">余额</p>
+              <strong id="balance">¥0.00</strong>
+            </article>
+          </div>
+
+          <div class="content-grid">
+            <section class="panel">
+              <div class="section-heading">
+                <h3>新增记录</h3>
+                <p>记录你的每一笔收入和支出</p>
+              </div>
+              <form id="recordForm" class="record-form">
+                <label>
+                  <span>类型</span>
+                  <select name="type" required>
+                    <option value="income">收入</option>
+                    <option value="expense">支出</option>
+                  </select>
+                </label>
+                <label>
+                  <span>金额</span>
+                  <input type="number" name="amount" min="0.01" step="0.01" placeholder="0.00" required />
+                </label>
+                <label>
+                  <span>分类</span>
+                  <input type="text" name="category" placeholder="比如：工资、餐饮" />
+                </label>
+                <label>
+                  <span>日期</span>
+                  <input type="date" name="recordDate" required />
+                </label>
+                <label class="full-width">
+                  <span>备注</span>
+                  <textarea name="note" rows="3" placeholder="补充说明"></textarea>
+                </label>
+                <button class="primary-button full-width" type="submit">保存记录</button>
+              </form>
+            </section>
+
+            <section class="panel">
+              <div class="section-heading">
+                <h3>记录查询</h3>
+                <p>按日期筛选你的流水</p>
+              </div>
+              <form id="filterForm" class="filter-form">
+                <label>
+                  <span>开始日期</span>
+                  <input type="date" name="startDate" />
+                </label>
+                <label>
+                  <span>结束日期</span>
+                  <input type="date" name="endDate" />
+                </label>
+                <button class="secondary-button" type="submit">应用筛选</button>
+                <button id="resetFilterButton" class="ghost-button" type="button">清空筛选</button>
+              </form>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>日期</th>
+                      <th>类型</th>
+                      <th>金额</th>
+                      <th>分类</th>
+                      <th>备注</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recordsBody">
+                    <tr>
+                      <td colspan="5" class="empty-cell">暂无记录</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
