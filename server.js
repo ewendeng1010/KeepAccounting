@@ -307,8 +307,8 @@ async function handleRequest(req, res) {
         return;
       }
 
-      if (password.length < 6) {
-        sendJson(res, 400, { error: "密码长度至少为 6 位" });
+      if (password.length < 8) {
+        sendJson(res, 400, { error: "密码长度至少为 8 位" });
         return;
       }
 
