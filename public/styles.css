@@ -82,6 +82,10 @@ textarea {
   gap: 22px;
 }
 
+.layout {
+  min-height: calc(100vh - 220px);
+}
+
 .content-grid {
   grid-template-columns: 360px minmax(0, 1fr);
 }
@@ -97,6 +101,8 @@ textarea {
 
 .auth-panel {
   max-width: 420px;
+  width: min(100%, 420px);
+  margin: auto;
 }
 
 .tabs {
@@ -205,6 +211,7 @@ textarea {
 .app-panel {
   display: grid;
   gap: 22px;
+  align-self: start;
 }
 
 .welcome-panel h2 {
@@ -332,6 +339,10 @@ th {
 @media (max-width: 640px) {
   .page-shell {
     padding: 28px 14px 44px;
+  }
+
+  .layout {
+    min-height: auto;
   }
 
   .hero {
